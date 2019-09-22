@@ -19,3 +19,8 @@ class OpenSubtitlesModel(object):
 
     def search_by_name_get_most_fit(self, name):
         return self.search_by_name_get_first_n(name, 1)
+
+    def download_by_file_id(self, id_subtitle_file):
+        self._refresh_auth()
+        path_to_files_by_id = self.ost.download_subtitles([id_subtitle_file])  # Files are placed at project root
+        return path_to_files_by_id
