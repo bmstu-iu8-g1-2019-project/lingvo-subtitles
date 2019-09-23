@@ -21,8 +21,10 @@ def search_view():
 
 @app.route('/parse')
 def parse_view():
-    return 'WIP'
+    request_query = request.form['query']
+
+    return jsonify(ctrl.get_learning_mode_data(request_query))
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
