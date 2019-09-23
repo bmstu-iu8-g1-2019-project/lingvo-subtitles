@@ -22,5 +22,6 @@ class OpenSubtitlesModel(object):
 
     def download_by_file_id(self, id_subtitle_file):
         self._refresh_auth()
-        path_to_files_by_id = self.ost.download_subtitles([id_subtitle_file])  # Files are placed at project root
-        return path_to_files_by_id
+        path_to_files_by_id_dict = self.ost.download_subtitles([id_subtitle_file])  # Files are placed at project root
+        path_to_subtitle_file = list(path_to_files_by_id_dict.values())[0]  # Get value from single entry dict
+        return path_to_subtitle_file
