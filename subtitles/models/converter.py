@@ -19,12 +19,12 @@ class Converter(object):
         words = words_counter.most_common()
         parsed_words = list()
 
-        for word in words:
+        for word_pair in words:
             pos_l = set()
-            for tmp in wordnet.synsets(word[0]):
-                if tmp.name().split('.')[0] == word[0]:
+            for tmp in wordnet.synsets(word_pair[0]):
+                if tmp.name().split('.')[0] == word_pair[0]:
                     pos_l.add(tmp.pos())
             if len(pos_l) > 0:
-                parsed_words.append(word[0])
+                parsed_words.append(word_pair[0])
 
         return parsed_words
