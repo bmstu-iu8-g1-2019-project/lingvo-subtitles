@@ -7,7 +7,7 @@ ctrl = controller.Controller()
 
 @app.route('/')
 def root_view():
-    return 'subtitle-backend API version indev'
+    return 'lingvo API version indev'
 
 
 @app.route('/search')
@@ -27,4 +27,4 @@ def parse_view():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port='5000')

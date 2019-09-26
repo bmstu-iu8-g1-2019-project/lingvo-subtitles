@@ -10,6 +10,7 @@ class OpenSubtitlesModel(object):
 
     def search_by_name_get_first_n(self, name, n):
         self._refresh_auth()
+
         search_result = self.ost.search_subtitles([{'sublanguageid': 'eng', 'query': name}])
         if type(search_result) == list and len(search_result) > 0:
             parsed_result = search_result[0:n]
@@ -22,6 +23,8 @@ class OpenSubtitlesModel(object):
 
     def download_by_file_id(self, id_subtitle_file):
         self._refresh_auth()
+
         path_to_files_by_id_dict = self.ost.download_subtitles([id_subtitle_file])  # Files are placed at project root
         path_to_subtitle_file = list(path_to_files_by_id_dict.values())[0]  # Get value from single entry dict
+
         return path_to_subtitle_file

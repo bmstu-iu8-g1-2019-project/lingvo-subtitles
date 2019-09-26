@@ -20,11 +20,11 @@ class Converter(object):
         parsed_words = list()
 
         for word_pair in words:
-            pos_l = set()
-            for tmp in wordnet.synsets(word_pair[0]):
-                if tmp.name().split('.')[0] == word_pair[0]:
-                    pos_l.add(tmp.pos())
-            if len(pos_l) > 0:
+            word_tags = set()
+            for word_synsets in wordnet.synsets(word_pair[0]):
+                if word_synsets.name().split('.')[0] == word_pair[0]:
+                    word_tags.add(word_synsets.pos())
+            if len(word_tags) > 0:
                 parsed_words.append(word_pair[0])
 
         return parsed_words

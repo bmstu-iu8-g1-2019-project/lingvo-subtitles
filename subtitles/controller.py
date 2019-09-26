@@ -13,5 +13,8 @@ class Controller(object):
 
     def get_learning_mode_data(self, name):
         path_to_subtitle_file = self._os_mdl.download_by_file_id(self._os_mdl.search_by_name_get_most_fit(name).get('IDSubtitleFile'))
-        conv = converter.Converter(path_to_subtitle_file)
-        return self._yt_mdl.translate_words_en_ru(conv.to_list())
+        ct_mdl = converter.Converter(path_to_subtitle_file)
+
+        words = ct_mdl.to_list()
+
+        return self._yt_mdl.translate_words_en_ru(words)
