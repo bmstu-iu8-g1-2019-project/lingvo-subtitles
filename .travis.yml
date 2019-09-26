@@ -1,0 +1,12 @@
+sudo: required
+
+services:
+  - docker
+
+language: python
+
+script:
+  - python -m unittest discover ./tests
+
+after_success:
+  - sh scripts/deploy_dockerhub.sh
