@@ -1,3 +1,5 @@
+os: linux
+
 sudo: required
 
 services:
@@ -5,8 +7,14 @@ services:
 
 language: python
 
-script:
-  - python -m unittest discover ./tests
+jobs:
+  include:
+    - name: "tests"
+      script:
+      - python -m unittest discover ./tests
 
 after_success:
-  - sh scripts/deploy_dockerhub.sh
+  - ./scripts/deploy_dockerhub.sh
+  
+notifications:
+  email: false
