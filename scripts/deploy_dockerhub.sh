@@ -6,4 +6,4 @@ else
     TAG="$TRAVIS_BRANCH"
 fi
 docker build -f Dockerfile -t lingvo-subtitles:$TAG .
-docker push $DOCKER_USER/lingvo-subtitles:${TAG}
+docker push $DOCKER_USER/lingvo-subtitles:$TAG
