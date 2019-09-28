@@ -2,9 +2,8 @@ from yandex_translate import YandexTranslate
 
 
 class YandexTranslateModel(object):
-    def __init__(self):
-        self._translator = YandexTranslate(
-            'trnsl.1.1.20190923T142916Z.e5bcea9267318d2d.1b812152591630d0d5a19f2e4c6dd07398a8bb9e')
+    def __init__(self, api_key):
+        self._translator = YandexTranslate(api_key)
 
     def translate_word_en_ru(self, word):
         translated_word_dict = self._translator.translate(word, 'en-ru')

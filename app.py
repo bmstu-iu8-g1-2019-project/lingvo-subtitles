@@ -1,8 +1,18 @@
+import os
+import sys
+
 from flask import Flask, request, jsonify
 from subtitles import controller
 
 app = Flask(__name__)
-ctrl = controller.Controller()
+
+if 'YANDEX_TRANSLATE_API_KEY' in os.environ:
+    yandex_translate_api_key = os.environ['YANDEX_TRANSLATE_API_KEY']
+else:
+    print('You have to provide Yandex Translate Api key, set YANDEX_TRANSLATE_API_KEY and restart')
+    sys.exit(1)
+
+ctrl = controller.Controller(yandex_translate_api_key)
 
 
 @app.route('/')
