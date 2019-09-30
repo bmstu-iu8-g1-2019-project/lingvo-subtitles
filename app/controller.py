@@ -1,6 +1,4 @@
-from subtitles.models import opensubtitles
-from subtitles.models import converter
-from subtitles.models import yandex_translate
+from app.models import yandex_translate, converter, opensubtitles
 
 
 class Controller(object):

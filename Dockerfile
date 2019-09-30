@@ -1,5 +1,5 @@
 FROM python:3-onbuild
 
-CMD [ "python", "./app.py" ]
+CMD [ "python", "./run.py" ]
 
 EXPOSE 5000
