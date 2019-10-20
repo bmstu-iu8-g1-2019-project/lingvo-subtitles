@@ -1,6 +1,6 @@
 import os
 
-from flask import request, jsonify, abort
+from flask import request, jsonify, abort, Response
 
 from app import app, auth
 from app import controller
@@ -49,7 +49,7 @@ def register_view():
         return jsonify({"user_id": str(registration_result)}), 201
 
 
-@app.route('/search')
+@app.route('/search', methods=['GET'])
 def search_view():
     request_query = request.form['query']
 
@@ -58,11 +58,12 @@ def search_view():
     return jsonify(raw_response)
 
 
-@app.route('/parse')
+@app.route('/parse', methods=['POST'])
 @auth.login_required
 def parse_view():
     request_query = request.form['query']
 
-    return jsonify(ctrl.get_learning_mode_data(request_query))
+    return jsonify({"cards": ctrl.get_learning_mode_data(request_query, auth.username())})
 
-from .models import auth
+
+from .models import authentication
