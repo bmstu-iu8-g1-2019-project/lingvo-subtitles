@@ -1,4 +1,8 @@
-from app.models import yandex_translate, converter, opensubtitles
+from app.models import yandex_translate, converter, opensubtitles, registration
+
+
+def register(email, username, hashed_password):
+    return registration.register_user(email, username, hashed_password)
 
 
 class Controller(object):

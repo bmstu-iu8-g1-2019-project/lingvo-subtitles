@@ -1,6 +1,6 @@
 import os
 
-from flask import request, jsonify
+from flask import request, jsonify, abort
 
 from app import app, auth
 from app import controller
@@ -11,6 +11,11 @@ ctrl = controller.Controller(os.environ['YANDEX_TRANSLATE_API_KEY'])
 @app.errorhandler(400)
 def error404_view(exception):
     return {"id": "400", "message": "Bad request"}
+
+
+@app.errorhandler(401)
+def error404_view(exception):
+    return {"id": "401", "message": "Unauthorized"}
 
 
 @app.errorhandler(403)
@@ -31,6 +36,17 @@ def error404_view(exception):
 @app.route('/')
 def root_view():
     return 'lingvo API version indev'
+
+
+@app.route('/register', methods=['POST'])
+def register_view():
+    registration_result = controller.register(request.form['email'], request.form['username'],
+                                              request.form['hashed_password'])
+
+    if registration_result == -1:
+        abort(400)
+    else:
+        return jsonify({"user_id": str(registration_result)}), 201
 
 
 @app.route('/search')
