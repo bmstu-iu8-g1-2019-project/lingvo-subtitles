@@ -19,8 +19,4 @@ class YandexTranslateModel(object):
             return
         translated_words = translated_words_dict['text']
 
-        word_translations_pairs = list()
-        for index in range(len(words)):
-            word_translations_pairs.append([words[index], translated_words[index]])
-
-        return word_translations_pairs
+        return translated_words
