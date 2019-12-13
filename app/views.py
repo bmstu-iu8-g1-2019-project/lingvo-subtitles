@@ -9,17 +9,17 @@ ctrl = controller.Controller(os.environ['YANDEX_TRANSLATE_API_KEY'])
 
 
 @app.errorhandler(400)
-def error404_view(exception):
+def error400_view(exception):
     return {"id": "400", "message": "Bad request"}
 
 
 @app.errorhandler(401)
-def error404_view(exception):
+def error401_view(exception):
     return {"id": "401", "message": "Unauthorized"}
 
 
 @app.errorhandler(403)
-def error404_view(exception):
+def error403_view(exception):
     return {"id": "403", "message": "Forbidden"}
 
 
@@ -29,7 +29,7 @@ def error404_view(exception):
 
 
 @app.errorhandler(500)
-def error404_view(exception):
+def error500_view(exception):
     return {"id": "500", "message": "Internal server error"}
 
 
@@ -38,10 +38,16 @@ def root_view():
     return 'lingvo API version indev'
 
 
+@app.route('/login', methods=['GET'])
+@auth.login_required
+def login_view():
+    return jsonify({"id": "200", "message": "Success"})
+
+
 @app.route('/register', methods=['POST'])
 def register_view():
-    registration_result = controller.register(request.form['email'], request.form['username'],
-                                              request.form['hashed_password'])
+    registration_result = controller.register("example@mail.com", request.form['username'],
+                                              request.form['password'])
 
     if registration_result == -1:
         abort(400)
@@ -49,7 +55,7 @@ def register_view():
         return jsonify({"user_id": str(registration_result)}), 201
 
 
-@app.route('/search', methods=['GET'])
+@app.route('/search', methods=['POST'])
 def search_view():
     request_query = request.form['query']
 
