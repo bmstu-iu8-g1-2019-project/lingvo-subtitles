@@ -46,7 +46,7 @@ def login_view():
 
 @app.route('/register', methods=['POST'])
 def register_view():
-    registration_result = controller.register("example@mail.com", request.form['username'],
+    registration_result = controller.register(request.form['username'] + "@lingvo.ru", request.form['username'],
                                               request.form['password'])
 
     if registration_result == -1:
