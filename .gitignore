@@ -125,4 +125,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# Project configuration
 .idea/
+
+# Local subtitle files
+*.srt

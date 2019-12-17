@@ -1,0 +1,20 @@
+os: linux
+
+sudo: required
+
+services:
+  - docker
+
+language: python
+
+jobs:
+  include:
+    - name: "tests"
+      script:
+      - python -m unittest discover ./tests
+
+after_success:
+  - ./scripts/deploy_dockerhub.sh
+  
+notifications:
+  email: false
